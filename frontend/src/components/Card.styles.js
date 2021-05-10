@@ -8,7 +8,7 @@ export default StyleSheet.create({
     height: height - 300,
     width: width/2.25,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     backgroundColor: colors.white,
     borderRadius: 5,
     shadowColor: colors.black,
@@ -27,7 +27,7 @@ export default StyleSheet.create({
   },
   photoDescriptionContainer: {
     justifyContent: 'flex-end',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     flexDirection: 'column',
     height: '100%',
     position: 'absolute',

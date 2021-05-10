@@ -10,8 +10,12 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
   swiperContainer: {
-    height: height - 250,
-    width: width/2
+    height: height - height/3,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+
+
   },
   buttonsContainer: {
     justifyContent: 'space-between',

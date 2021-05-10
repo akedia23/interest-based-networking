@@ -17,6 +17,7 @@ const App = () => {
       style={styles.container}
     >
       <View style={styles.swiperContainer}>
+        
         <Swiper
           ref={useSwiper}
           animateCardOpacity
@@ -86,6 +87,25 @@ const App = () => {
             // },
           }}
         />
+        <IconButton
+          name="close"
+          onPress={handleOnSwipedLeft}
+          color="white"
+          backgroundColor="#E5566D"
+        />
+        <IconButton
+          name="close"
+          onPress={handleOnSwipedLeft}
+          color="white"
+          backgroundColor="#E5566D"
+        />
+         <IconButton
+          name="close"
+          onPress={handleOnSwipedLeft}
+          color="white"
+          backgroundColor="#E5566D"
+        />
+        
       </View>
       
       <View style={styles.buttonsContainer}>
@@ -95,18 +115,19 @@ const App = () => {
           color="white"
           backgroundColor="#E5566D"
         />
-        <IconButton
+        {/* <IconButton
           name="star"
           onPress={handleOnSwipedTop}
           color="white"
           backgroundColor="#3CA3FF"
-        />
+        /> */}
         <IconButton
           name="heart"
           onPress={handleOnSwipedRight}
           color="white"
           backgroundColor="#4CCC93"
         />
+        
       </View>
       <View style={styles.swipeTextContainer}>
         <Text
