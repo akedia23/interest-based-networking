@@ -1,6 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native'
 
 const { height } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
+
 
 export default StyleSheet.create({
   container: {
@@ -9,6 +11,7 @@ export default StyleSheet.create({
   },
   swiperContainer: {
     height: height - 250,
+    width: width/2
   },
   buttonsContainer: {
     justifyContent: 'space-between',

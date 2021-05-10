@@ -12,6 +12,7 @@ const Card = ({ card }) => (
       source={card.photo}
       resizeMode="cover"
     />
+    
     <View style={styles.photoDescriptionContainer}>
       <Text style={styles.text}>
         {`${card.name}, ${card.age}`}

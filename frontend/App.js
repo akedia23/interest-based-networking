@@ -26,9 +26,11 @@ const App = () => {
           cardIndex={0}
           backgroundColor="white"
           stackSize={2}
-          infinite
+          // infinite
           showSecondCard
+          disableLeftSwipe
           animateOverlayLabelsOpacity
+
           overlayLabels={{
             left: {
               title: 'NOPE',
@@ -50,19 +52,18 @@ const App = () => {
             },
           }}
         />
-      </View>
-      <View style={styles.swiperContainer}>
         <Swiper
           ref={useSwiper}
           animateCardOpacity
           containerStyle={styles.container}
           cards={photoCards}
           renderCard={card => <Card card={card} />}
-          cardIndex={0}
+          cardIndex={1}
           backgroundColor="white"
           stackSize={2}
-          infinite
+          // infinite
           showSecondCard
+          disableRightSwipe
           animateOverlayLabelsOpacity
           overlayLabels={{
             left: {
@@ -72,20 +73,21 @@ const App = () => {
                 wrapper: styles.overlayWrapper,
               },
             },
-            right: {
-              title: 'LIKE',
-              element: <OverlayLabel label="LIKE" color="#4CCC93" />,
-              style: {
-                wrapper: {
-                  ...styles.overlayWrapper,
-                  alignItems: 'flex-start',
-                  marginLeft: 30,
-                },
-              },
-            },
+            // right: {
+            //   title: 'LIKE',
+            //   element: <OverlayLabel label="LIKE" color="#4CCC93" />,
+            //   style: {
+            //     wrapper: {
+            //       ...styles.overlayWrapper,
+            //       alignItems: 'flex-start',
+            //       marginLeft: -30,
+            //     },
+            //   },
+            // },
           }}
         />
       </View>
+      
       <View style={styles.buttonsContainer}>
         <IconButton
           name="close"
