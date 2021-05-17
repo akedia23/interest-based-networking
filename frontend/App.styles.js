@@ -8,20 +8,21 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
+    // flexDirection: 'row',
   },
   swiperContainer: {
     height: height - height/3,
+    width: width/2,
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
-
 
   },
   buttonsContainer: {
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: '15%',
+    paddingHorizontal: '18%',
   },
   copyright: {
     textAlign: 'center',
@@ -31,7 +32,7 @@ export default StyleSheet.create({
     fontFamily: 'Avenir',
   },
   overlayWrapper: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'flex-start',
     marginTop: 30,

@@ -7,8 +7,8 @@ export default StyleSheet.create({
     /* Setting the height according to the screen height, it also could be fixed value or based on percentage. In this example, this worked well on Android and iOS. */
     height: height - 300,
     width: width/2.25,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     backgroundColor: colors.white,
     borderRadius: 5,
     shadowColor: colors.black,
