@@ -15,7 +15,7 @@ const Card = ({ card }) => (
     
     <View style={styles.photoDescriptionContainer}>
       <Text style={styles.text}>
-        {`${card.name}, ${card.age}`}
+        {`${card.name}`}
       </Text>
     </View>
   </View>
@@ -25,7 +25,6 @@ Card.propTypes = {
   card: shape({
     photo: ImageSourcePropType,
     name: string,
-    age: number,
   }).isRequired,
 }
 export default Card

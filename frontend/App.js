@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
 import { View, Text } from 'react-native'
 import Swiper from 'react-native-deck-swiper'
-import { photoCards } from './src/constants'
+import { photoCards } from './src/constants/'
+import { photoCards2 } from './src/constants'
 import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 import { Card, IconButton, OverlayLabel } from './src/components'
@@ -19,10 +20,10 @@ const App = () => {
     >
       <View style={styles.swiperContainer}>
         
-        <Swiper
+        {/* <Swiper
           ref={useSwiper}
           animateCardOpacity
-          // containerStyle={styles.swiperContainer}
+          containerStyle={styles.container}
           cards={photoCards}
           renderCard={card => <Card card={card} />}
           cardIndex={0}
@@ -33,39 +34,7 @@ const App = () => {
           disableLeftSwipe
           disableBottomSwipe
           animateOverlayLabelsOpacity
-          overlayLabels={{
-            right: {
-              title: 'LIKE',
-              element: <OverlayLabel label="LIKE" color="#4CCC93" />,
-              style: {
-                wrapper: {
-                  ...styles.overlayWrapper,
-                  alignItems: 'flex-start',
-                  marginLeft: 30,
-                },
-              },
-            },
-          }}
-        />
-        
-      {/* </View> */}
-      {/* <View style={styles.swiperContainer}> */}
 
-       
-        <Swiper
-          ref={useSwiper}
-          animateCardOpacity
-          containerStyle={styles.swiperContainer}
-          cards={photoCards}
-          renderCard={card => <Card card={card} />}
-          cardIndex={0}
-          backgroundColor="white"
-          stackSize={2}
-          showSecondCard
-          disableRightSwipe
-          disableTopSwipe
-          disableBottomSwipe
-          animateOverlayLabelsOpacity
           overlayLabels={{
             left: {
               title: 'NOPE',
@@ -77,18 +46,38 @@ const App = () => {
             right: {
               title: 'LIKE',
               element: <OverlayLabel label="LIKE" color="#4CCC93" />,
-              style: {
-                wrapper: {
-                  ...styles.overlayWrapper,
-                  alignItems: 'flex-start',
-                  marginLeft: 30,
-                },
-              },
             },
           }}
-          
+        /> */}
+        <Swiper
+          ref={useSwiper}
+          animateCardOpacity
+          containerStyle={styles.container}
+          cards={photoCards}
+          renderCard={card => <Card card={card} />}
+          cardIndex={2}
+          backgroundColor="white"
+          stackSize={2}
+          infinite
+          showSecondCard
+          disableRightSwipe
+          disableBottomSwipe
+          animateOverlayLabelsOpacity
+
+          overlayLabels={{
+            left: {
+              title: 'LIKE',
+              element: <OverlayLabel label="NOPE" color="#E5566D" />,
+              style: {
+                wrapper: styles.overlayWrapper,
+              },
+            },
+            right: {
+              title: 'LIKE',
+              element: <OverlayLabel label="LIKE" color="#4CCC93" />,
+            },
+          }}
         />
-        
         
       </View>
 
