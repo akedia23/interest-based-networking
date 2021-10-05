@@ -8,7 +8,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
-    // flexDirection: 'row',
+    flexDirection: 'row',
   },
   button: {
     backgroundColor: '#859a9b',
@@ -21,7 +21,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.35,
   },
   swiperContainer: {
-    height: height - height/3,
+    height: height - height,
     width: width/2,
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -48,4 +48,10 @@ export default StyleSheet.create({
     marginTop: 30,
     marginLeft: -30,
   },
+  leftSwiper: {
+    justifyContent: "flex-start"
+  },
+  rightSwiper: {
+    justifyContent: "flex-end"
+  }
 })
