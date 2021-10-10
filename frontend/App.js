@@ -33,13 +33,6 @@ const App = () => {
             animateOverlayLabelsOpacity
 
             overlayLabels={{
-              left: {
-                title: 'NOPE',
-                element: <OverlayLabel label="NOPE" color="#E5566D" />,
-                style: {
-                  wrapper: styles.overlayWrapper,
-                },
-              },
               right: {
                 title: 'LIKE',
                 element: <OverlayLabel label="LIKE" color="#4CCC93" />,
@@ -62,16 +55,17 @@ const App = () => {
             disableRightSwipe
             disableBottomSwipe
             animateOverlayLabelsOpacity
+            onSwiped={(cardIndex) => {cardIndex+2}}
 
             overlayLabels={{
-              left: {
+              right: {
                 title: 'LIKE',
                 element: <OverlayLabel label="NOPE" color="#E5566D" />,
                 style: {
                   wrapper: styles.overlayWrapper,
                 },
               },
-              right: {
+              left: {
                 title: 'LIKE',
                 element: <OverlayLabel label="LIKE" color="#4CCC93" />,
               },
