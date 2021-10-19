@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { View, Text } from 'react-native'
 import Swiper from 'react-native-deck-swiper'
 import { photoCards, photoCards2 } from './src/constants/'
@@ -8,17 +8,20 @@ import { Card, IconButton, OverlayLabel } from './src/components'
 import styles from './App.styles'
 
 const App = () => {
-  const useSwiper = useRef(null).current
+  const [cardIndex, setCardIndex] = useState(0);
 
-  const handleOnSwipedLeft = () => useSwiper.swipeLeft()
-  const handleOnSwipedRight = () => useSwiper.swipeRight()
+  const useSwiperL = useRef(null)
+  const useSwiperR = useRef(null)
+
+  const handleOnSwipedLeft = (X,Y) => useSwiperL.current.swipeLeft()
+  const handleOnSwipedRight = (X,Y) => useSwiperR.current.swipeRight()
 
   return (
     <View style={styles.container}>
       <View style={styles.swiperContainer}>
         <View style={styles.leftSwiper}>
           <Swiper
-            ref={useSwiper}
+            ref={useSwiperL}
             animateCardOpacity
             containerStyle={styles.container}
             cards={photoCards2}
@@ -31,7 +34,7 @@ const App = () => {
             disableLeftSwipe
             disableBottomSwipe
             animateOverlayLabelsOpacity
-
+            onSwipedRight={handleOnSwipedRight}
             overlayLabels={{
               right: {
                 title: 'LIKE',
@@ -42,7 +45,7 @@ const App = () => {
         </View>
         <View style={styles.rightSwiper}>
           <Swiper
-            ref={useSwiper}
+            ref={useSwiperR}
             animateCardOpacity
             containerStyle={styles.container}
             cards={photoCards}
@@ -55,6 +58,7 @@ const App = () => {
             disableRightSwipe
             disableBottomSwipe
             animateOverlayLabelsOpacity
+            onSwipedLeft={handleOnSwipedLeft}
 
             overlayLabels={{
               right: {
