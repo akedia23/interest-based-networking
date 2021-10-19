@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { View, Text } from 'react-native'
 import Swiper from 'react-native-deck-swiper'
 import { photoCards } from './src/constants/'
@@ -7,7 +7,17 @@ import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Card, IconButton, OverlayLabel } from './src/components'
 import styles from './App.styles'
 
+const handleSwipeRight = (cardIndex) => {
+
+}
+
 const App = () => {
+  const [zIndex, setZIndex] = useState(1);
+
+  const raiseZ = () => {
+    setZIndex(2);
+  }
+
   const useSwiper = useRef(null).current
 
   const handleOnSwipedLeft = () => useSwiper.swipeLeft()
@@ -16,7 +26,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.swiperContainer}>
-        <View style={styles.leftSwiper}>
+        <View style={[styles.leftSwiper, { zIndex: zIndex }]}>
           <Swiper
             ref={useSwiper}
             animateCardOpacity
@@ -31,6 +41,8 @@ const App = () => {
             disableLeftSwipe
             disableBottomSwipe
             animateOverlayLabelsOpacity
+            onSwipedRight={handleSwipeRight}
+            onSwiping={raiseZ}
 
             overlayLabels={{
               left: {
