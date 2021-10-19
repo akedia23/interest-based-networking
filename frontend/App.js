@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { View, Text } from 'react-native'
 import Swiper from 'react-native-deck-swiper'
-import { photoCards } from './src/constants/'
+import { photoCards, photoCards2 } from './src/constants/'
 import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 import { Card, IconButton, OverlayLabel } from './src/components'
@@ -31,7 +31,7 @@ const App = () => {
             ref={useSwiper}
             animateCardOpacity
             containerStyle={styles.container}
-            cards={photoCards}
+            cards={photoCards2}
             renderCard={card => <Card card={card} />}
             cardIndex={0}
             backgroundColor="white"
@@ -45,13 +45,6 @@ const App = () => {
             onSwiping={raiseZ}
 
             overlayLabels={{
-              left: {
-                title: 'NOPE',
-                element: <OverlayLabel label="NOPE" color="#E5566D" />,
-                style: {
-                  wrapper: styles.overlayWrapper,
-                },
-              },
               right: {
                 title: 'LIKE',
                 element: <OverlayLabel label="LIKE" color="#4CCC93" />,
@@ -66,7 +59,7 @@ const App = () => {
             containerStyle={styles.container}
             cards={photoCards}
             renderCard={card => <Card card={card} />}
-            cardIndex={2}
+            cardIndex={0}
             backgroundColor="white"
             stackSize={2}
             infinite
@@ -76,14 +69,14 @@ const App = () => {
             animateOverlayLabelsOpacity
 
             overlayLabels={{
-              left: {
+              right: {
                 title: 'LIKE',
                 element: <OverlayLabel label="NOPE" color="#E5566D" />,
                 style: {
                   wrapper: styles.overlayWrapper,
                 },
               },
-              right: {
+              left: {
                 title: 'LIKE',
                 element: <OverlayLabel label="LIKE" color="#4CCC93" />,
               },
