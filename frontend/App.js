@@ -16,19 +16,20 @@ const App = () => {
 
   const raiseZ = () => {
     setZIndex(2);
-  }
+  };
 
-  const useSwiper = useRef(null).current
+  const useSwiper1 = useRef(null);
+  const useSwiper2 = useRef(null);
 
-  const handleOnSwipedLeft = () => useSwiper.swipeLeft()
-  const handleOnSwipedRight = () => useSwiper.swipeRight()
+  const handleOnSwipedLeft = () => useSwiper1.current.swipeLeft()
+  const handleOnSwipedRight = () => useSwiper2.current.swipeRight()
 
   return (
     <View style={styles.container}>
       <View style={styles.swiperContainer}>
-        <View style={[styles.leftSwiper, { zIndex: zIndex }]}>
+        <View style={[styles.leftSwiper, { zIndex: 3 }]}>
           <Swiper
-            ref={useSwiper}
+            ref={useSwiper1}
             animateCardOpacity
             containerStyle={styles.container}
             cards={photoCards2}
@@ -52,9 +53,9 @@ const App = () => {
             }}
           />
         </View>
-        <View style={styles.rightSwiper}>
+        <View style={styles.rightSwiper, { zIndex: 3 }}>
           <Swiper
-            ref={useSwiper}
+            ref={useSwiper2}
             animateCardOpacity
             containerStyle={styles.container}
             cards={photoCards}
@@ -67,6 +68,7 @@ const App = () => {
             disableRightSwipe
             disableBottomSwipe
             animateOverlayLabelsOpacity
+            onSwiping={raiseZ}
 
             overlayLabels={{
               right: {
