@@ -3,52 +3,63 @@ import { View, Text } from 'react-native'
 import Swiper from 'react-native-deck-swiper'
 import { photoCards, photoCards2 } from './src/constants/'
 import { StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { getDatabase, ref, set } from "firebase/database";
+import firebase from 'firebase';
 
 import { Card, IconButton, OverlayLabel } from './src/components'
 import styles from './App.styles'
 
 const App = () => {
+  
   const [cardIndex, setCardIndex] = useState(0);
 
   const useSwiperL = useRef(null)
   const useSwiperR = useRef(null)
 
-  const handleOnSwipedLeft = (X,Y) => useSwiperL.current.swipeLeft()
-  const handleOnSwipedRight = (X,Y) => useSwiperR.current.swipeRight()
+
+  const handleOnSwipedLeft = () => {
+    useSwiperL.current.swipeLeft()
+      }
+  
+  const handleOnSwipedRight = () => {
+    useSwiperR.current.swipeRight()
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.swiperContainer}>
-        <View style={styles.leftSwiper}>
-          <Swiper
-            ref={useSwiperL}
-            animateCardOpacity
-            containerStyle={styles.container}
-            cards={photoCards2}
-            renderCard={card => <Card card={card} />}
-            cardIndex={0}
-            backgroundColor="white"
-            stackSize={2}
-            infinite
-            showSecondCard
-            disableLeftSwipe
-            disableBottomSwipe
-            animateOverlayLabelsOpacity
-            onSwipedRight={handleOnSwipedRight}
-            overlayLabels={{
-              right: {
-                title: 'LIKE',
-                element: <OverlayLabel label="LIKE" color="#4CCC93" />,
-              },
-            }}
-          />
-        </View>
+          <View style={styles.leftSwiper}>
+            <Swiper
+              ref={useSwiperL}
+              animateCardOpacity
+              cards={photoCards}
+              renderCard={card => <Card card={card} />}
+              cardIndex={0}
+              backgroundColor="white"
+              stackSize={2}
+              infinite
+              showSecondCard
+              disableLeftSwipe
+              disableBottomSwipe
+              animateOverlayLabelsOpacity
+              onSwipedRight={() => {
+                useSwiperR.current.swipeRight()
+                console.log(photoCards[cardIndex].name)
+                setCardIndex(cardIndex+1)
+              }}
+              overlayLabels={{
+                right: {
+                  title: 'LIKE',
+                  element: <OverlayLabel label="LIKE" color="#4CCC93" />,
+                },
+              }}
+            />
+          </View>
         <View style={styles.rightSwiper}>
           <Swiper
             ref={useSwiperR}
             animateCardOpacity
-            containerStyle={styles.container}
-            cards={photoCards}
+            cards={photoCards2}
             renderCard={card => <Card card={card} />}
             cardIndex={0}
             backgroundColor="white"
@@ -58,8 +69,11 @@ const App = () => {
             disableRightSwipe
             disableBottomSwipe
             animateOverlayLabelsOpacity
-            onSwipedLeft={handleOnSwipedLeft}
-
+            onSwipedLeft={() => {
+              useSwiperL.current.swipeLeft()
+              console.log(photoCards2[cardIndex].name)
+              setCardIndex(cardIndex+1)
+            }}
             overlayLabels={{
               right: {
                 title: 'LIKE',
@@ -76,21 +90,21 @@ const App = () => {
           />
       </View>
     </View>
-      {/* <View style={styles.buttonsContainer}> */}
-        {/* <IconButton
-          name="heart"
-          onPress={handleOnSwipedLeft}
-          color="white"
-          backgroundColor="#E5566D"
-        />
+      {/* <View style={styles.buttonsContainer}>
         <IconButton
           name="heart"
           onPress={handleOnSwipedRight}
           color="white"
           backgroundColor="#E5566D"
-        /> */}
+        />
+        <IconButton
+          name="heart"
+          onPress={handleOnSwipedLeft}
+          color="white"
+          backgroundColor="#E5566D"
+        />
         
-      {/* </View> */}
+      </View> */}
       {/* <View style={styles.copyright}>
         <Text style={styles.copyright}>
             All pictures were taken freely from Unsplash.com.

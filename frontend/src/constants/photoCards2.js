@@ -72,8 +72,8 @@ const photoCards2 = [
         photo: require('../../assets/offwhite.png'),
     },
     {
-        name: 'Jordan',
-        photo: require('../../assets/jordan.jpg'),
+        name: 'iPhone',
+        photo: require('../../assets/iphone.jpg'),
     },
     {
         name: 'iPad',

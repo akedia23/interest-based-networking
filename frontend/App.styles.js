@@ -9,6 +9,8 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     flexDirection: 'row',
+    alignItems: 'stretch',
+
   },
   button: {
     backgroundColor: '#859a9b',
@@ -25,7 +27,7 @@ export default StyleSheet.create({
     width: width/2,
     justifyContent: 'space-between',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
 
   },
   buttonsContainer: {
@@ -46,7 +48,6 @@ export default StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-start',
     marginTop: 30,
-    marginLeft: -30,
   },
   leftSwiper: {
     justifyContent: "flex-start"
