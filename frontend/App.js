@@ -3,6 +3,8 @@ import { View, Text, TouchableHighlight } from "react-native";
 import Swiper from "react-native-deck-swiper";
 import { photoCards, photoCards2 } from "./src/constants/";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
+import { getDatabase, ref, set } from "firebase/database";
+import firebase from "firebase";
 
 import { Card, IconButton, OverlayLabel } from "./src/components";
 import styles from "./App.styles";
@@ -20,10 +22,12 @@ const App = () => {
 
   const handleOnSwipedLeft = (X, Y) => {
     useSwiperL.current.swipeLeft();
+    console.log(photoCards[cardIndex].name);
     setCardIndex(cardIndex + 1);
   };
   const handleOnSwipedRight = (X, Y) => {
     useSwiperR.current.swipeRight();
+    console.log(photoCards2[cardIndex].name);
     setCardIndex(cardIndex + 1);
   };
 
@@ -124,23 +128,21 @@ const App = () => {
           />
         </View>
       </View>
-      {/* )} */}
-
-      {/* <View style={styles.buttonsContainer}> */}
-      {/* <IconButton
-          name="heart"
-          onPress={handleOnSwipedLeft}
-          color="white"
-          backgroundColor="#E5566D"
-        />
+      {/* <View style={styles.buttonsContainer}>
         <IconButton
           name="heart"
           onPress={handleOnSwipedRight}
           color="white"
           backgroundColor="#E5566D"
-        /> */}
-
-      {/* </View> */}
+        />
+        <IconButton
+          name="heart"
+          onPress={handleOnSwipedLeft}
+          color="white"
+          backgroundColor="#E5566D"
+        />
+        
+      </View> */}
       {/* <View style={styles.copyright}>
         <Text style={styles.copyright}>
             All pictures were taken freely from Unsplash.com.
