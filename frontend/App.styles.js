@@ -53,5 +53,9 @@ export default StyleSheet.create({
   },
   rightSwiper: {
     justifyContent: "flex-end"
+  },
+  image: {
+    width: width,
+    height: "100%"
   }
 })
