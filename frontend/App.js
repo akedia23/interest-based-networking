@@ -22,12 +22,12 @@ const App = () => {
 
   const handleOnSwipedLeft = (X, Y) => {
     useSwiperL.current.swipeLeft();
-    console.log(photoCards[cardIndex].name);
+    console.log(photoCards2[cardIndex].name);
     setCardIndex(cardIndex + 1);
   };
   const handleOnSwipedRight = (X, Y) => {
     useSwiperR.current.swipeRight();
-    console.log(photoCards2[cardIndex].name);
+    console.log(photoCards[cardIndex].name);
     setCardIndex(cardIndex + 1);
   };
 
