@@ -25,6 +25,11 @@ def check_token(f):
         return f(*args, **kwargs)
     return wrap
 
+@app.route('/test')
+@check_token
+def test():
+    return {'message':'yo'},200
+
 #Api route to sign up a new user
 @app.route('/api/signup')
 def signup():
@@ -53,6 +58,7 @@ def token():
         jwt = user['idToken']
         return {'token': jwt},200
     except:
+        logging.exception("message")
         return {'message': 'There was an error logging in'},400
 
 @app.route("/")
