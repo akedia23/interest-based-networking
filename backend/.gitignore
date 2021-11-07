@@ -1,3 +1,6 @@
 env/**/*
 fbAdminConfig.json
 fbconfig.json
+
+#macOS
+.DS_Store
