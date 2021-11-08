@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native';
+
 export default StyleSheet.create({
     container: {
       flex: 1,
@@ -23,8 +25,7 @@ export default StyleSheet.create({
     TextInput: {
       height: 50,
       flex: 1,
-      padding: 10,
-      marginLeft: 20,
+      alignItems: "center"
     },
   
     forgot_button: {

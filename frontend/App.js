@@ -7,11 +7,12 @@ import { TouchableOpacity, Image } from "react-native";
 import { Card, OverlayLabel } from "./src/components";
 import styles from "./src/styles/App.styles";
 import Main from "./src/screens/Main";
+import Login from "./src/screens/Login";
 
 const handleSwipeRight = (cardIndex) => {};
 
 const App = () => {
-  return <Main></Main>;
+  return <Login></Login>;
 };
 
 export default App;
