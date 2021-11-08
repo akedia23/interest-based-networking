@@ -37,7 +37,7 @@ const photoCards2 = [
     },
     {
       name: 'Playstation',
-      photo: require('../../assets/playstation.png'),
+      photo: require('../../assets/ps.png'),
     },
     {
       name: 'Warriors',
