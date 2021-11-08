@@ -2,7 +2,7 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { func, string } from 'prop-types'
 import Icon from 'react-native-vector-icons/AntDesign'
-import styles from './IconButton.styles'
+import styles from '../styles/IconButton.styles'
 import { colors } from '../constants'
 const IconButton = ({ onPress, name, backgroundColor, color }) => (
   <TouchableOpacity

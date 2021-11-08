@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Image, ImageSourcePropType } from 'react-native'
 import { shape, string, number } from 'prop-types'
-import styles from './Card.styles'
+import styles from '../styles/Card.styles'
 const Card = ({ card }) => (
   <View
     activeOpacity={1}
