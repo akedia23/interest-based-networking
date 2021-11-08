@@ -74,6 +74,7 @@ const Main = () => {
               showSecondCard
               disableLeftSwipe
               disableBottomSwipe
+              disableTopSwipe
               animateOverlayLabelsOpacity
               onTapCard={() => {
                 setLeftEnlargedImage("TAPPED");
@@ -102,6 +103,7 @@ const Main = () => {
               showSecondCard
               disableRightSwipe
               disableBottomSwipe
+              disableTopSwipe
               animateOverlayLabelsOpacity
               onTapCard={() => {
                 setRightEnlargedImage("TAPPED");

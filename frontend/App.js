@@ -8,10 +8,24 @@ import { Card, OverlayLabel } from "./src/components";
 import styles from "./src/styles/App.styles";
 import Main from "./src/screens/Main";
 
-const handleSwipeRight = (cardIndex) => {};
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const App = () => {
-  return <Main></Main>;
-};
+const Tab = createBottomTabNavigator();
 
-export default App;
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="LandingPage" component={Main} />
+      {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
+    </Tab.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
+  );
+}
