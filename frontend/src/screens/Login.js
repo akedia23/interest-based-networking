@@ -1,20 +1,28 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
+
 import styles from "../styles/Login.styles";
+import firebase from "../firebase/firebase";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const login = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((resp) => {
+        console.log("Login successful!");
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
   return (
     <View style={styles.container}>
-
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
@@ -39,8 +47,8 @@ const Login = () => {
         <Text style={styles.forgot_button}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
+      <TouchableOpacity style={styles.loginBtn} onPress={login}>
+        <Text>LOGIN</Text>
       </TouchableOpacity>
     </View>
   );

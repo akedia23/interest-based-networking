@@ -1,18 +1,41 @@
-import React, { useRef, useState } from "react";
-import { View } from "react-native";
-import Swiper from "react-native-deck-swiper";
-import { photoCards, photoCards2 } from "./src/constants/";
-import { TouchableOpacity, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text } from "react-native";
 
-import { Card, OverlayLabel } from "./src/components";
-import styles from "./src/styles/App.styles";
 import Main from "./src/screens/Main";
 import Login from "./src/screens/Login";
-
-const handleSwipeRight = (cardIndex) => {};
+import SignUp from "./src/screens/SignUp";
+import firebase from "./src/firebase/firebase";
+import SignOut from "./src/screens/SignOut";
 
 const App = () => {
-  return <Login></Login>;
+  const [loading, setLoading] = useState(true);
+  const [authenticated, setAuthenticated] = useState(true);
+
+  useEffect(() => {
+    return firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setAuthenticated(true);
+        console.log(user.uid);
+      } else {
+        setAuthenticated(false);
+      }
+      setLoading(false);
+    });
+  }, [loading]);
+
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading Tether...</Text>
+      </View>
+    );
+  }
+
+  if (!authenticated) {
+    return <Login />;
+  }
+
+  return <SignOut />;
 };
 
 export default App;
