@@ -7,6 +7,7 @@ import { TouchableOpacity, Image } from "react-native";
 import { Card, OverlayLabel } from "../components";
 import styles from "../styles/App.styles";
 
+
 const Main = () => {
     const [cardIndex, setCardIndex] = useState(0);
     const [leftEnlargedImage, setLeftEnlargedImage] = useState("DEFAULT");
@@ -26,9 +27,12 @@ const Main = () => {
       console.log(photoCards[cardIndex].name);
       setCardIndex(cardIndex + 1);
     };
+
   
     return (
-      <View>
+
+      <View> 
+    
         {leftEnlargedImage === "TAPPED" && (
           <View style={{ position: "absolute", zIndex: 2 }}>
             <TouchableOpacity
@@ -73,6 +77,7 @@ const Main = () => {
               infinite
               showSecondCard
               disableLeftSwipe
+              disableTopSwipe
               disableBottomSwipe
               animateOverlayLabelsOpacity
               onTapCard={() => {
@@ -101,6 +106,7 @@ const Main = () => {
               infinite
               showSecondCard
               disableRightSwipe
+              disableTopSwipe
               disableBottomSwipe
               animateOverlayLabelsOpacity
               onTapCard={() => {
@@ -124,27 +130,6 @@ const Main = () => {
             />
           </View>
         </View>
-        {/* <View style={styles.buttonsContainer}>
-          <IconButton
-            name="heart"
-            onPress={handleOnSwipedRight}
-            color="white"
-            backgroundColor="#E5566D"
-          />
-          <IconButton
-            name="heart"
-            onPress={handleOnSwipedLeft}
-            color="white"
-            backgroundColor="#E5566D"
-          />
-          
-        </View> */}
-        {/* <View style={styles.copyright}>
-          <Text style={styles.copyright}>
-              All pictures were taken freely from Unsplash.com.
-              Names on the Photos are the names of photographers who took pictures.
-          </Text>
-        </View> */}
       </View>
     );
   };

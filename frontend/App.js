@@ -7,6 +7,20 @@ import SignUp from "./src/screens/SignUp";
 import firebase from "./src/firebase/firebase";
 import SignOut from "./src/screens/SignOut";
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="LandingPage" component={Main} />
+      {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
+    </Tab.Navigator>
+  );
+}
+
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(true);
@@ -35,7 +49,11 @@ const App = () => {
     return <Login />;
   }
 
-  return <SignOut />;
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
+  );
 };
 
 export default App;
