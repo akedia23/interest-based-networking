@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Main from "./src/screens/Main";
 import Login from "./src/screens/Login";
 import SignUp from "./src/screens/SignUp";
 import firebase from "./src/firebase/firebase";
 import SignOut from "./src/screens/SignOut";
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { UserContext } from "./src/contexts";
 
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="LandingPage" component={Main} />
+      <Tab.Screen
+        name="LandingPage"
+        component={Main}
+        // initialParams={{ userId: props.userId }}
+      />
       {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
     </Tab.Navigator>
   );
@@ -24,12 +28,13 @@ function MyTabs() {
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(true);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setAuthenticated(true);
-        console.log(user.uid);
+        setUserId(user.uid);
       } else {
         setAuthenticated(false);
       }
@@ -51,7 +56,9 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <MyTabs />
+      <UserContext.Provider value={userId}>
+      < MyTabs/>
+      </UserContext.Provider>
     </NavigationContainer>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { View } from "react-native";
 import Swiper from "react-native-deck-swiper";
 import { photoCards, photoCards2 } from "../constants/";
@@ -6,13 +6,17 @@ import { TouchableOpacity, Image } from "react-native";
 
 import { Card, OverlayLabel } from "../components";
 import styles from "../styles/App.styles";
+import { UserContext } from "../contexts";
 
-
-const Main = () => {
+const Main = (props) => {
     const [cardIndex, setCardIndex] = useState(0);
     const [leftEnlargedImage, setLeftEnlargedImage] = useState("DEFAULT");
     const [rightEnlargedImage, setRightEnlargedImage] = useState("DEFAULT");
     // const [enlargedImage, setEnlargedImage] = useState("DEFAULT");
+    
+    const userId = useContext(UserContext);
+    console.log("Hello", userId);
+    // console.log(props.route.params.userId);
   
     const useSwiperL = useRef(null);
     const useSwiperR = useRef(null);
@@ -28,11 +32,8 @@ const Main = () => {
       setCardIndex(cardIndex + 1);
     };
 
-  
     return (
-
       <View> 
-    
         {leftEnlargedImage === "TAPPED" && (
           <View style={{ position: "absolute", zIndex: 2 }}>
             <TouchableOpacity
