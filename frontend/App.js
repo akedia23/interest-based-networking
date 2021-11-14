@@ -6,6 +6,8 @@ import Login from "./src/screens/Login";
 import SignUp from "./src/screens/SignUp";
 import firebase from "./src/firebase/firebase";
 import SignOut from "./src/screens/SignOut";
+import Profile from "./src/screens/Profile";
+
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -16,7 +18,7 @@ function MyTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="LandingPage" component={Main} />
-      {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 }

@@ -5,18 +5,19 @@ import { Text, View, TouchableOpacity, Alert } from "react-native";
 import styles from "../styles/Login.styles";
 import firebase from "../firebase/firebase";
 
+export const signOut = () => {
+  firebase
+    .auth()
+    .signOut()
+    .then((resp) => {
+      console.log("Sign out successful.");
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+};
+
 const SignOut = () => {
-  const signOut = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then((resp) => {
-        console.log("Sign out successful.");
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  };
 
   return (
     <View style={styles.container}>
