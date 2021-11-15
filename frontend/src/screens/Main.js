@@ -15,8 +15,8 @@ const Main = () => {
     // const [enlargedImage, setEnlargedImage] = useState("DEFAULT");
     
     const userId = useContext(UserContext).userId;
-    const swipes = useContext(UserContext).swipes;
-    console.log(swipes);
+    const swiped = useContext(UserContext).swiped;
+    console.log(swiped);
   
     const useSwiperL = useRef(null);
     const useSwiperR = useRef(null);
@@ -24,13 +24,13 @@ const Main = () => {
     const handleOnSwipedLeft = (X, Y) => {
       useSwiperL.current.swipeLeft();
       console.log(photoCards2[cardIndex % photoCards2.length].name);
-      swipes.push(photoCards2[cardIndex % photoCards2.length].name);
+      swiped.push(photoCards2[cardIndex % photoCards2.length].name);
       setCardIndex(cardIndex + 1);
     };
     const handleOnSwipedRight = (X, Y) => {
       useSwiperR.current.swipeRight();
       console.log(photoCards[cardIndex % photoCards.length].name);
-      swipes.push(photoCards[cardIndex % photoCards.length].name);
+      swiped.push(photoCards[cardIndex % photoCards.length].name);
       setCardIndex(cardIndex + 1);
     };
 
@@ -76,6 +76,7 @@ const Main = () => {
               renderCard={(card) => <Card card={card} />}
               cardIndex={cardIndex}
               backgroundColor="white"
+              cardHorizontalMargin={10}
               stackSize={2}
               infinite
               showSecondCard
@@ -105,6 +106,7 @@ const Main = () => {
               renderCard={(card) => <Card card={card} />}
               cardIndex={cardIndex}
               backgroundColor="white"
+              cardHorizontalMargin={10}
               stackSize={2}
               infinite
               showSecondCard

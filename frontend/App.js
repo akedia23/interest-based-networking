@@ -56,7 +56,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <UserContext.Provider value={{ userId, swipes: [] }}>
+      <UserContext.Provider value={{ userId, swiped: [], notSwiped: [] }}>
         <MyTabs />
       </UserContext.Provider>
     </NavigationContainer>
