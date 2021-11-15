@@ -8,7 +8,7 @@ import { Card, OverlayLabel } from "../components";
 import styles from "../styles/App.styles";
 import { UserContext } from "../contexts";
 
-const Main = (props) => {
+const Main = () => {
     const [cardIndex, setCardIndex] = useState(0);
     const [leftEnlargedImage, setLeftEnlargedImage] = useState("DEFAULT");
     const [rightEnlargedImage, setRightEnlargedImage] = useState("DEFAULT");
