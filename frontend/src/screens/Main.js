@@ -16,7 +16,6 @@ const Main = () => {
     
     const userId = useContext(UserContext);
     console.log("Hello", userId);
-    // console.log(props.route.params.userId);
   
     const useSwiperL = useRef(null);
     const useSwiperR = useRef(null);
