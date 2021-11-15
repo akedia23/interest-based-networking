@@ -14,20 +14,23 @@ const Main = () => {
     const [rightEnlargedImage, setRightEnlargedImage] = useState("DEFAULT");
     // const [enlargedImage, setEnlargedImage] = useState("DEFAULT");
     
-    const userId = useContext(UserContext);
-    console.log("Hello", userId);
+    const userId = useContext(UserContext).userId;
+    const swipes = useContext(UserContext).swipes;
+    console.log(swipes);
   
     const useSwiperL = useRef(null);
     const useSwiperR = useRef(null);
   
     const handleOnSwipedLeft = (X, Y) => {
       useSwiperL.current.swipeLeft();
-      console.log(photoCards2[cardIndex].name);
+      console.log(photoCards2[cardIndex % photoCards2.length].name);
+      swipes.push(photoCards2[cardIndex % photoCards2.length].name);
       setCardIndex(cardIndex + 1);
     };
     const handleOnSwipedRight = (X, Y) => {
       useSwiperR.current.swipeRight();
-      console.log(photoCards[cardIndex].name);
+      console.log(photoCards[cardIndex % photoCards.length].name);
+      swipes.push(photoCards[cardIndex % photoCards.length].name);
       setCardIndex(cardIndex + 1);
     };
 
