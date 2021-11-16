@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     header:{
-      backgroundColor: "#00BFFF",
+      backgroundColor: "#FFC0CB",
       height:200,
     },
     avatar: {
@@ -55,6 +55,6 @@ export default StyleSheet.create({
       marginBottom:20,
       width:250,
       borderRadius:30,
-      backgroundColor: "#00BFFF",
+      backgroundColor: "#FF1493"
     },
   })
