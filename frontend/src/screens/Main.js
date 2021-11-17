@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { View } from "react-native";
 import Swiper from "react-native-deck-swiper";
 import { photoCards, photoCards2 } from "../constants/";
@@ -6,33 +6,36 @@ import { TouchableOpacity, Image } from "react-native";
 
 import { Card, OverlayLabel } from "../components";
 import styles from "../styles/App.styles";
-
+import { UserContext } from "../contexts";
 
 const Main = () => {
     const [cardIndex, setCardIndex] = useState(0);
     const [leftEnlargedImage, setLeftEnlargedImage] = useState("DEFAULT");
     const [rightEnlargedImage, setRightEnlargedImage] = useState("DEFAULT");
     // const [enlargedImage, setEnlargedImage] = useState("DEFAULT");
+    
+    const userId = useContext(UserContext).userId;
+    const swiped = useContext(UserContext).swiped;
+    console.log(swiped);
   
     const useSwiperL = useRef(null);
     const useSwiperR = useRef(null);
   
     const handleOnSwipedLeft = (X, Y) => {
       useSwiperL.current.swipeLeft();
-      console.log(photoCards2[cardIndex].name);
+      console.log(photoCards2[cardIndex % photoCards2.length].name);
+      swiped.push(photoCards2[cardIndex % photoCards2.length].name);
       setCardIndex(cardIndex + 1);
     };
     const handleOnSwipedRight = (X, Y) => {
       useSwiperR.current.swipeRight();
-      console.log(photoCards[cardIndex].name);
+      console.log(photoCards[cardIndex % photoCards.length].name);
+      swiped.push(photoCards[cardIndex % photoCards.length].name);
       setCardIndex(cardIndex + 1);
     };
 
-  
     return (
-
       <View> 
-    
         {leftEnlargedImage === "TAPPED" && (
           <View style={{ position: "absolute", zIndex: 2 }}>
             <TouchableOpacity
@@ -73,6 +76,7 @@ const Main = () => {
               renderCard={(card) => <Card card={card} />}
               cardIndex={cardIndex}
               backgroundColor="white"
+              cardHorizontalMargin={10}
               stackSize={2}
               infinite
               showSecondCard
@@ -102,6 +106,7 @@ const Main = () => {
               renderCard={(card) => <Card card={card} />}
               cardIndex={cardIndex}
               backgroundColor="white"
+              cardHorizontalMargin={10}
               stackSize={2}
               infinite
               showSecondCard
