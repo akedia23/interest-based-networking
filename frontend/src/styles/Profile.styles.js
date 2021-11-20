@@ -7,8 +7,8 @@ export default StyleSheet.create({
       height:200,
     },
     avatar: {
-      width: 130,
-      height: 130,
+      width: 170,
+      height: 17 add0,
       borderRadius: 63,
       borderWidth: 4,
       borderColor: "white",

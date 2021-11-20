@@ -23,7 +23,10 @@ const Profile = () => {
               
               <TouchableOpacity style={styles.buttonContainer}>
                 <Text>Opcion 1</Text>  
-              </TouchableOpacity>              
+              </TouchableOpacity>      
+              <TouchableOpacity style={styles.buttonContainer}>
+                <Text>Opcion 1</Text>  
+              </TouchableOpacity>         
               <StatusBar style="auto" />
               <TouchableOpacity style={styles.buttonContainer} onPress={signOut}>
                 <Text>Sign Out</Text>
