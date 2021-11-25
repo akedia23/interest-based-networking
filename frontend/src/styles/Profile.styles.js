@@ -1,60 +1,65 @@
 
 import { StyleSheet } from "react-native";
 
-export default StyleSheet.create({
-    header:{
-      backgroundColor: "#00BFFF",
-      height:200,
-    },
-    avatar: {
-      width: 130,
-      height: 130,
-      borderRadius: 63,
-      borderWidth: 4,
-      borderColor: "white",
-      marginBottom:10,
-      alignSelf:'center',
-      position: 'absolute',
-      marginTop:130
-    },
-    name:{
-      fontSize:22,
-      color:"#FFFFFF",
-      fontWeight:'600',
-    },
-    body:{
-      marginTop:40,
-    },
-    bodyContent: {
-      flex: 1,
-      alignItems: 'center',
-      padding:30,
-    },
-    name:{
-      fontSize:28,
-      color: "#696969",
-      fontWeight: "600"
-    },
-    info:{
-      fontSize:16,
-      color: "#00BFFF",
-      marginTop:10
-    },
-    description:{
-      fontSize:16,
-      color: "#696969",
-      marginTop:10,
-      textAlign: 'center'
-    },
-    buttonContainer: {
-      marginTop:10,
-      height:45,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginBottom:20,
-      width:250,
-      borderRadius:30,
-      backgroundColor: "#00BFFF",
-    },
-  })
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  userImg: {
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+  },
+  userName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  aboutUser: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  userBtnWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+    marginBottom: 10,
+  },
+  userBtn: {
+    borderColor: '#FF1493',
+    borderWidth: 2,
+    borderRadius: 3,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginHorizontal: 5,
+  },
+  userBtnTxt: {
+    color: '#FF1493',
+  },
+  userInfoWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginVertical: 20,
+  },
+  userInfoItem: {
+    justifyContent: 'center',
+  },
+  userInfoTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    textAlign: 'center',
+  },
+  userInfoSubTitle: {
+    fontSize: 12,
+    color: '#666',
+    textAlign: 'center',
+  },
+});
