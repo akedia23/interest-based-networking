@@ -8,6 +8,7 @@ import Login from "./src/screens/Login";
 import SignUp from "./src/screens/SignUp";
 import firebase from "./src/firebase/firebase";
 import SignOut from "./src/screens/SignOut";
+import Profile from "./src/screens/Profile";
 import { UserContext } from "./src/constants/contexts";
 import { MMKV } from "./src/constants/asyncStorage";
 
@@ -16,12 +17,8 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen
-        name="LandingPage"
-        component={Main}
-        // initialParams={{ userId: props.userId }}
-      />
-      {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
+      <Tab.Screen name="LandingPage" component={Main} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 }
@@ -63,14 +60,13 @@ const App = () => {
   }
 
   if (!authenticated) {
-    return <SignUp />;
+    return <Login />;
   }
 
   return (
     <NavigationContainer>
       <UserContext.Provider value={{ userId, swiped, notSwiped }}>
-        {/* <MyTabs /> */}
-        <SignUp/>
+        <MyTabs />
       </UserContext.Provider>
     </NavigationContainer>
   );
