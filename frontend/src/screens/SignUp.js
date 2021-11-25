@@ -1,9 +1,10 @@
-import { StatusBar } from "expo-status-bar";
+import { setStatusBarBackgroundColor, StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { Text, View, TextInput, TouchableOpacity, Alert } from "react-native";
 
 import styles from "../styles/Login.styles";
-import firebase from "../firebase/firebase";
+// import firestore from "firebase";
+import firebase, { firestore } from "../firebase/firebase";
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -21,11 +22,21 @@ const SignUp = () => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((resp) => {
+        firestore
+          .collection("users")
+          .doc(firebase.auth().currentUser.uid)
+          .set({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            // createdAt: firestore.Timestamp.fromDate(new Date()),
+            userImg: null,
+          });
         console.log("Account creation successful!");
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   };
 
   return (
@@ -36,7 +47,7 @@ const SignUp = () => {
           style={styles.TextInput}
           placeholder="First Name."
           placeholderTextColor="#003f5c"
-          onChangeText={(firstName) => setEmail(firstName)}
+          onChangeText={(firstName) => setFirstName(firstName)}
         />
       </View>
       <View style={styles.inputView}>
@@ -44,7 +55,7 @@ const SignUp = () => {
           style={styles.TextInput}
           placeholder="Last Name."
           placeholderTextColor="#003f5c"
-          onChangeText={(lastName) => setEmail(lastName)}
+          onChangeText={(lastName) => setLastName(lastName)}
         />
       </View>
       <View style={styles.inputView}>
@@ -70,7 +81,9 @@ const SignUp = () => {
           placeholder="Confirm Password."
           placeholderTextColor="#003f5c"
           secureTextEntry={true}
-          onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
+          onChangeText={(confirmPassword) =>
+            setConfirmPassword(confirmPassword)
+          }
         />
       </View>
 

@@ -23,11 +23,12 @@ export default StyleSheet.create({
     shadowOpacity: 0.35,
   },
   swiperContainer: {
-    height: height - height,
+    height: height,
     width: width/2,
-    justifyContent: 'space-between',
+    flex: 1,
+    justifyContent: 'space-around',
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    // alignItems: 'space-between',
 
   },
   buttonsContainer: {
@@ -50,10 +51,16 @@ export default StyleSheet.create({
     marginTop: 30,
   },
   leftSwiper: {
-    justifyContent: "flex-start"
+    // alignSelf: "flex-start",
+    // marginLeft: 10,
+    flex: 1,
+    // justifyContent: 'flex-start'
   },
   rightSwiper: {
-    justifyContent: "flex-end"
+    // alignSelf: "flex-end",
+    // marginLeft: 10,
+    flex: 1,
+    // justifyContent: 'flex-end'
   },
   image: {
     width: width,
