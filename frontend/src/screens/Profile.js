@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { StatusBar } from "expo-status-bar";
+
 import { signOut } from "./SignOut";
-import firestore from '@react-native-firebase/firestore';
-
-
 import styles from "../styles/Profile.styles";
 
 import {
@@ -36,9 +34,9 @@ const Profile = () => {
           style={styles.container}
           contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
           showsVerticalScrollIndicator={false}>
-          <Image
+          {/* <Image
             style={styles.userImg}
-            source={require('../../assets/bts.jpg')}/>
+            source={require('../../assets/bts.jpg')}/> */}
           <Text style={styles.userName}>Ria Test</Text>
           <Text style={styles.aboutUser}>Ria is cool</Text>
           <View style={styles.userBtnWrapper}>
