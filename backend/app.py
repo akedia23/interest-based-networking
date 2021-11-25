@@ -1,7 +1,7 @@
 import firebase_admin
 import pyrebase
 import json
-from firebase_admin import credentials, auth
+from firebase_admin import credentials, auth, firestore
 from flask import Flask, request
 from functools import wraps
 import logging
@@ -11,10 +11,14 @@ app = Flask(__name__)
 cred = credentials.Certificate('fbAdminConfig.json')
 firebase = firebase_admin.initialize_app(cred)
 pb = pyrebase.initialize_app(json.load(open('fbconfig.json')))
+db = firestore.client()
+users = db.collection('users')
 
-@app.route('/addSwipes')
+@app.route('/addSwipes', methods=['POST'])
 def add_swipes():
-    return
+    
+    users.document('1').set({"item2": 3})
+    return {"message": "success"}, 200
 
 def check_token(f):
     @wraps(f)
