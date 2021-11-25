@@ -12,6 +12,10 @@ cred = credentials.Certificate('fbAdminConfig.json')
 firebase = firebase_admin.initialize_app(cred)
 pb = pyrebase.initialize_app(json.load(open('fbconfig.json')))
 
+@app.route('/addSwipes')
+def add_swipes():
+    return
+
 def check_token(f):
     @wraps(f)
     def wrap(*args,**kwargs):
