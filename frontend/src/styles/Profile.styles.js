@@ -1,11 +1,13 @@
 
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from 'react-native'
+const { height } = Dimensions.get('window')
 
-const styles = StyleSheet.create({
+
+export default StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     padding: 20,
+    height: height,
   },
   userImg: {
     height: 150,
@@ -63,4 +65,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
 
