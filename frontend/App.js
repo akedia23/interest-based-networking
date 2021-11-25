@@ -8,7 +8,8 @@ import Login from "./src/screens/Login";
 import SignUp from "./src/screens/SignUp";
 import firebase from "./src/firebase/firebase";
 import SignOut from "./src/screens/SignOut";
-import { UserContext } from "./src/contexts";
+import { UserContext } from "./src/constants/contexts";
+import { MMKV } from "./src/constants/asyncStorage";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,10 +26,21 @@ function MyTabs() {
   );
 }
 
+const getAsyncSwipes = (choice) => {
+  let choiceArray = MMKV.getArray(choice);
+  if (!choiceArray) {
+    choiceArray = []
+  }
+  return choiceArray;
+} 
+
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(true);
   const [userId, setUserId] = useState("");
+
+  const swiped = getAsyncSwipes("swiped");
+  const notSwiped = getAsyncSwipes("notSwiped");
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged((user) => {
@@ -56,7 +68,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <UserContext.Provider value={{ userId, swiped: [], notSwiped: [] }}>
+      <UserContext.Provider value={{ userId, swiped, notSwiped }}>
         <MyTabs />
       </UserContext.Provider>
     </NavigationContainer>

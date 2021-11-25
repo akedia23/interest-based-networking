@@ -5951,6 +5951,11 @@
   dependencies:
     "prop-types" "15.5.10"
 
+"react-native-mmkv-storage@^0.6.6":
+  "integrity" "sha512-SV7tm3K5nD9x0KZf6ayj8G+xx1LmqKnwcvhXrg66awopEf8Y7JAy9kH4G4ngJzBWfXVyYo5E93RPv9MlQdCfxQ=="
+  "resolved" "https://registry.npmjs.org/react-native-mmkv-storage/-/react-native-mmkv-storage-0.6.6.tgz"
+  "version" "0.6.6"
+
 "react-native-navigation@^7.23.1-hotfix.1":
   "integrity" "sha512-3VnUBylFqVdxFb88GaZeLpyLYQByOW8pZoeXAlEAxmylTrFm4kPyBQraOSdjutjVO9yddYGMYXFa/DmH5l6jjA=="
   "resolved" "https://registry.npmjs.org/react-native-navigation/-/react-native-navigation-7.23.1-hotfix.1.tgz"
