@@ -63,13 +63,14 @@ const App = () => {
   }
 
   if (!authenticated) {
-    return <Login />;
+    return <SignUp />;
   }
 
   return (
     <NavigationContainer>
       <UserContext.Provider value={{ userId, swiped, notSwiped }}>
-        <MyTabs />
+        {/* <MyTabs /> */}
+        <SignUp/>
       </UserContext.Provider>
     </NavigationContainer>
   );
