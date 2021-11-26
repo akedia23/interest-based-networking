@@ -2,7 +2,7 @@ import firebase_admin
 import pyrebase
 import json
 from firebase_admin import credentials, auth, firestore
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from functools import wraps
 import logging
 
@@ -16,9 +16,18 @@ users = db.collection('users')
 
 @app.route('/addSwipes', methods=['POST'])
 def add_swipes():
-    
-    users.document('1').set({"item2": 3})
-    return {"message": "success"}, 200
+    try:
+        print(request.json['id'])
+        swipes = users.document(request.json['id']).collection('swipes')
+        for swipe in swipes.stream():
+            print(f'{swipe.id} => {swipe.to_dict()}')
+        # all_items = [doc.to_dict() for doc in swipes.stream()]
+        # print(all_items)
+        return {"message": "succeeded"}, 200
+    except Exception as e:
+        return f"An error occurred: {e}"
+    # users.document(request.json['id']).collection('swipes').update(request.json['swipes'])
+    # users.document('1').set({"item2": 3})
 
 def check_token(f):
     @wraps(f)
