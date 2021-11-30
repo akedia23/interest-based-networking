@@ -11,6 +11,7 @@ import { UserContext } from "../constants/contexts";
 import { MMKV } from "../constants/asyncStorage";
 import { getRandomInt } from "../utils";
 
+
 const Main = () => {
   const [cardIndex, setCardIndex] = useState(0);
   const [totalSwipes, setTotalSwipes] = useState(0);
@@ -49,7 +50,7 @@ const Main = () => {
     setCardIndex(cardIndex + 1);
   };
 
-  const backendHandler = (totalSwipes, userId, swipedCards, notSwipedCards) => {
+  const sendSwipes = (totalSwipes, userId, swipedCards, notSwipedCards) => {
     const params = {
       id: userId,
       swiped: swipedCards,
