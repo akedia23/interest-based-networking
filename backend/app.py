@@ -18,8 +18,10 @@ users = db.collection('users')
 def add_swipes():
     try:
         swiped = request.json['swiped']
-        notSwiped = request.json['notSwiped']  
-        swipes = users.document(request.json['id']).collection('swipes').document('item1').get().to_dict()
+        print(swiped)
+        notSwiped = request.json['notSwiped']
+        print(notSwiped)
+        # swipes = users.document(request.json['id']).collection('swipes').document('item1').get().to_dict()
         for swipe in swiped:
             doc_ref = users.document(request.json['id']).collection('swipes').document(swipe)
             val = doc_ref.get().to_dict()
@@ -46,7 +48,7 @@ def add_swipes():
                     "weight": firestore.Increment(-0.5),
                     "seen": firestore.Increment(1)
                 })
-                
+
         return {"message": "succeeded"}, 200
     except Exception as e:
         return f"An error occurred: {e}"
