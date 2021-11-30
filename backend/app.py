@@ -18,6 +18,8 @@ users = db.collection('users')
 def add_swipes():
     try:
         print(request.json['id'])
+        print(request.json['swiped'])
+        print(request.json['notSwiped'])
         swipes = users.document(request.json['id']).collection('swipes')
         for swipe in swipes.stream():
             print(f'{swipe.id} => {swipe.to_dict()}')
@@ -26,6 +28,7 @@ def add_swipes():
         return {"message": "succeeded"}, 200
     except Exception as e:
         return f"An error occurred: {e}"
+        # print(e)
     # users.document(request.json['id']).collection('swipes').update(request.json['swipes'])
     # users.document('1').set({"item2": 3})
 
@@ -84,4 +87,4 @@ def hello():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='192.168.1.250', port=5000, debug=True)

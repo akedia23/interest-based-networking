@@ -57,20 +57,23 @@ const Main = () => {
   };
 
   const backendHandler = (totalSwipes, userId, swipedCards, notSwipedCards) => {
+    const params = {id: userId, 
+      swiped: swipedCards,
+      notSwiped: notSwipedCards};
+
     if(totalSwipes >= 5) {
       setTotalSwipes(0);
-      fetch("http://localhost:19002/addSwipes", {
+      fetch("http://192.168.1.250:5000/addSwipes", {
         method:"POST",
-        cache: "no-cache",
+        // cache: "no-cache",
         headers:{
-          'Accept': 'application/json',
+          'Accept': '*/*',
           "Content-Type":"application/json",
         },
-        body:{id: userId, 
-              swiped: swipedCards,
-              notSwiped: notSwipedCards}
+        body: JSON.stringify(params)
       })
-        .then(response => response.json())
+        .then(response => response.text())
+        .then(data => console.log(data))
         .catch(error => console.log(error))
     }
   }
