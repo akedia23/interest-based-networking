@@ -17,14 +17,36 @@ users = db.collection('users')
 @app.route('/addSwipes', methods=['POST'])
 def add_swipes():
     try:
-        print(request.json['id'])
-        print(request.json['swiped'])
-        print(request.json['notSwiped'])
-        swipes = users.document(request.json['id']).collection('swipes')
-        for swipe in swipes.stream():
-            print(f'{swipe.id} => {swipe.to_dict()}')
-        # all_items = [doc.to_dict() for doc in swipes.stream()]
-        # print(all_items)
+        swiped = request.json['swiped']
+        notSwiped = request.json['notSwiped']  
+        swipes = users.document(request.json['id']).collection('swipes').document('item1').get().to_dict()
+        for swipe in swiped:
+            doc_ref = users.document(request.json['id']).collection('swipes').document(swipe)
+            val = doc_ref.get().to_dict()
+            if val is None:
+                doc_ref.set({
+                    "weight": 1, 
+                    "seen": 1
+                })
+            else:
+                doc_ref.update({
+                    "weight": firestore.Increment(1),
+                    "seen": firestore.Increment(1)
+                })
+        for swipe in notSwiped:
+            doc_ref = users.document(request.json['id']).collection('swipes').document(swipe)
+            val = doc_ref.get().to_dict()
+            if val is None:
+                doc_ref.set({
+                    "weight": -0.5, 
+                    "seen": 1
+                })
+            else:
+                doc_ref.update({
+                    "weight": firestore.Increment(-0.5),
+                    "seen": firestore.Increment(1)
+                })
+                
         return {"message": "succeeded"}, 200
     except Exception as e:
         return f"An error occurred: {e}"
