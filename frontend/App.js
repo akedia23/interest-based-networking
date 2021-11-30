@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Main from "./src/screens/Main";
@@ -11,13 +12,23 @@ import SignOut from "./src/screens/SignOut";
 import Profile from "./src/screens/Profile";
 import { UserContext } from "./src/constants/contexts";
 import { MMKV } from "./src/constants/asyncStorage";
+import { StackRouter } from "react-navigation";
+
+const Stack = createStackNavigator();
+const LoginNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Sign Up" component={SignUp} />
+    </Stack.Navigator>
+  );
+};
 
 const Tab = createBottomTabNavigator();
-
 function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="LandingPage" component={Main} />
+      <Tab.Screen name="Tether" component={Main} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
@@ -26,10 +37,10 @@ function MyTabs() {
 const getAsyncSwipes = (choice) => {
   let choiceArray = MMKV.getArray(choice);
   if (!choiceArray) {
-    choiceArray = []
+    choiceArray = [];
   }
   return choiceArray;
-} 
+};
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -60,7 +71,11 @@ const App = () => {
   }
 
   if (!authenticated) {
-    return <Login />;
+    return (
+      <NavigationContainer>
+        <LoginNavigator />
+      </NavigationContainer>
+    );
   }
 
   return (
