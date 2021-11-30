@@ -5,7 +5,7 @@ import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import styles from "../styles/Login.styles";
 import firebase from "../firebase/firebase";
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -49,6 +49,10 @@ const Login = () => {
 
       <TouchableOpacity style={styles.loginBtn} onPress={login}>
         <Text>LOGIN</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate("Sign Up")}>
+        <Text style={styles.forgot_button}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
     </View>
   );
