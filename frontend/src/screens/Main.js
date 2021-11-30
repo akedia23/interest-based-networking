@@ -14,6 +14,7 @@ import { getRandomInt } from "../utils";
 
 const Main = () => {
   const [cardIndex, setCardIndex] = useState(0);
+  const [totalSwipes, setTotalSwipes] = useState(0);
   const [leftEnlargedImage, setLeftEnlargedImage] = useState("DEFAULT");
   const [rightEnlargedImage, setRightEnlargedImage] = useState("DEFAULT");
   const [randomSwipeCount, setRandomSwipeCount] = useState(getRandomInt(5, 10));
@@ -26,28 +27,56 @@ const Main = () => {
   const useSwiperL = useRef(null);
   const useSwiperR = useRef(null);
 
+
   const handleOnSwipedLeft = (X, Y) => {
     useSwiperL.current.swipeLeft();
     console.log(photoCards2[cardIndex % photoCards2.length].name);
     swiped.push(photoCards2[cardIndex % photoCards2.length].name);
     notSwiped.push(photoCards[cardIndex % photoCards.length].name);
+    setTotalSwipes(totalSwipes + 1);
+    backendHandler(totalSwipes, userId, swiped, notSwiped);
 
     MMKV.setArray("swiped", swiped);
     MMKV.setArray("notSwiped", notSwiped);
 
     setCardIndex(cardIndex + 1);
   };
+
   const handleOnSwipedRight = (X, Y) => {
     useSwiperR.current.swipeRight();
     console.log(photoCards[cardIndex % photoCards.length].name);
     swiped.push(photoCards[cardIndex % photoCards.length].name);
     notSwiped.push(photoCards2[cardIndex % photoCards2.length].name);
-
+    setTotalSwipes(totalSwipes + 1);
+    backendHandler(totalSwipes, userId, swiped, notSwiped);
+    
     MMKV.setArray("swiped", swiped);
     MMKV.setArray("notSwiped", notSwiped);
 
     setCardIndex(cardIndex + 1);
   };
+
+  const backendHandler = (totalSwipes, userId, swipedCards, notSwipedCards) => {
+    const params = {id: userId, 
+      swiped: swipedCards,
+      notSwiped: notSwipedCards};
+
+    if(totalSwipes >= 5) {
+      setTotalSwipes(0);
+      fetch("http://192.168.1.250:5000/addSwipes", {
+        method:"POST",
+        // cache: "no-cache",
+        headers:{
+          'Accept': '*/*',
+          "Content-Type":"application/json",
+        },
+        body: JSON.stringify(params)
+      })
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.log(error))
+    }
+  }
 
   return (
     <View>
