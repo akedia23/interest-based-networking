@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useContext, useState } from 'react';
 import { StatusBar } from "expo-status-bar";
 import { signOut } from "./SignOut";
-// import firestore from '@react-native-firebase/firestore';
+import firebase, { firestore } from "../firebase/firebase";
+import { UserContext } from "../constants/contexts";
+
 
 
 import styles from "../styles/Profile.styles";
@@ -15,21 +17,21 @@ import {
   ScrollView
 } from 'react-native';
 
-// const getUser = async() => {
-//   await firestore()
-//   .collection('users')
-//   .doc( route.params ? route.params.userId : user.uid)
-//   .get()
-//   .then((documentSnapshot) => {
-//     if( documentSnapshot.exists ) {
-//       console.log('User Data', documentSnapshot.data());
-//       setUserData(documentSnapshot.data());
-//     }
-//   })
-// }
 
 
 const Profile = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const userId = useContext(UserContext).userId;
+
+
+  firestore.collection('users').doc(userId).get()
+  .then(docSnapshot => {
+    console.log("User data:", docSnapshot.data());
+    setFirstName(docSnapshot.data()["firstName"]);
+    setLastName(docSnapshot.data()["lastName"]);
+  });
+  
     return (
       <SafeAreaView>
         <ScrollView
@@ -38,8 +40,7 @@ const Profile = () => {
           showsVerticalScrollIndicator={false}>
           <Image style={styles.userImg}
             source={require('../../assets/bts.jpg')}/>
-          <Text style={styles.userName}>User Name</Text>
-          <Text style={styles.aboutUser}>User Bio</Text>
+          <Text style={styles.userName}>{firstName != null ? firstName || 'Test' : 'Test'} {lastName != null ? lastName || 'User' : 'User'}</Text>
           <View style={styles.userBtnWrapper}>
             <StatusBar style="auto" />
             <TouchableOpacity style={styles.userBtn} onPress={signOut}>
