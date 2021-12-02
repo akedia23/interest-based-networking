@@ -5,6 +5,9 @@ from firebase_admin import credentials, auth, firestore
 from flask import Flask, request, jsonify
 from functools import wraps
 import logging
+import pandas as pd
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
 
@@ -14,40 +17,51 @@ pb = pyrebase.initialize_app(json.load(open('fbconfig.json')))
 db = firestore.client()
 users = db.collection('users')
 
+def add_swipes_helper(user_id, swipes, swiped=1):
+    val = 1
+    if not swiped:
+        val = -0.5
+    for swipe in swipes:
+        doc_ref = users.document(user_id).collection('swipes').document(swipe)
+        data = doc_ref.get().to_dict()
+        if data is None:
+            doc_ref.set({
+                "weight": val, 
+                "seen": 1
+            })
+        else:
+            doc_ref.update({
+                "weight": firestore.Increment(val),
+                "seen": firestore.Increment(1)
+            })
+
+def get_match(user_id):
+    swipes_data = []
+    for user in users.stream():
+        swipes = users.document(user.id).collection('swipes')
+        for swipe in swipes.stream():
+            swipes_data.append([user.id, swipe.id, swipe.to_dict()["weight"]])
+    swipes_df = pd.DataFrame(swipes_data, columns=["userId", "item", "weight"])
+    final = pd.pivot_table(swipes_df, values="weight", index="userId", columns="item")
+    final = final.fillna(0)
+    cosine = cosine_similarity(final)
+    np.fill_diagonal(cosine, 0)
+    similarities = pd.DataFrame(cosine, index=final.index)
+    similarities.columns = final.index
+    similarities = np.abs(similarities)
+    print(similarities[user_id].sort_values(ascending=False).index[0])
+    
+
 @app.route('/addSwipes', methods=['POST'])
 def add_swipes():
     try:
         swiped = request.json['swiped']
-        print(swiped)
-        notSwiped = request.json['notSwiped']
-        print(notSwiped)
-        # swipes = users.document(request.json['id']).collection('swipes').document('item1').get().to_dict()
-        for swipe in swiped:
-            doc_ref = users.document(request.json['id']).collection('swipes').document(swipe)
-            val = doc_ref.get().to_dict()
-            if val is None:
-                doc_ref.set({
-                    "weight": 1, 
-                    "seen": 1
-                })
-            else:
-                doc_ref.update({
-                    "weight": firestore.Increment(1),
-                    "seen": firestore.Increment(1)
-                })
-        for swipe in notSwiped:
-            doc_ref = users.document(request.json['id']).collection('swipes').document(swipe)
-            val = doc_ref.get().to_dict()
-            if val is None:
-                doc_ref.set({
-                    "weight": -0.5, 
-                    "seen": 1
-                })
-            else:
-                doc_ref.update({
-                    "weight": firestore.Increment(-0.5),
-                    "seen": firestore.Increment(1)
-                })
+        not_swiped = request.json['notSwiped']
+        user_id = request.json['id']
+
+        add_swipes_helper(user_id, swiped, 1)
+        add_swipes_helper(user_id, not_swiped, 0)
+        get_match(user_id)
 
         return {"message": "succeeded"}, 200
     except Exception as e:
@@ -111,4 +125,5 @@ def hello():
 
 
 if __name__ == "__main__":
-    app.run(host='192.168.1.250', port=5000, debug=True)
+    app.run(host='192.168.1.32', port=5000, debug=True)
+    # app.run(debug=True)

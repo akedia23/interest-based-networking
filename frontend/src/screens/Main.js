@@ -59,7 +59,7 @@ const Main = () => {
 
     if (totalSwipes >= 5) {
       setTotalSwipes(0);
-      fetch("http://192.168.1.250:5000/addSwipes", {
+      fetch("http://192.168.1.32:5000/addSwipes", {
         method: "POST",
         // cache: "no-cache",
         headers: {
