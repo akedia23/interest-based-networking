@@ -3,7 +3,6 @@ import { Alert, View } from "react-native";
 import Swiper from "react-native-deck-swiper";
 import { photoCards, photoCards2 } from "../constants/";
 import { TouchableOpacity, Image,Text } from "react-native";
-import Modal from "react-native-modal";
 import { Root, Popup, Toast } from 'popup-ui'
 
 
@@ -19,15 +18,12 @@ const Main = () => {
   const [totalSwipes, setTotalSwipes] = useState(0);
   const [leftEnlargedImage, setLeftEnlargedImage] = useState("DEFAULT");
   const [rightEnlargedImage, setRightEnlargedImage] = useState("DEFAULT");
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [matchName, setMatchName] = useState("");
   const [randomSwipeCount, setRandomSwipeCount] = useState(getRandomInt(5, 10));
-  const handleModal = () => setIsModalVisible(() => !isModalVisible);
 
   // const [enlargedImage, setEnlargedImage] = useState("DEFAULT");
 
-  const userId = useContext(UserContext).userId;
-  const swiped = useContext(UserContext).swiped;
-  const notSwiped = useContext(UserContext).notSwiped;
+  const { userId, swiped, notSwiped, matches, setMatches } = useContext(UserContext);
 
   const useSwiperL = useRef(null);
   const useSwiperR = useRef(null);
@@ -73,18 +69,23 @@ const Main = () => {
         },
         body: JSON.stringify(params),
       })
-        .then((response) => response.text())
-        .then((data) => console.log(data))
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          const name = data.firstName + " " + data.lastName;
+          const newMatches = [...matches, name];
+          setMatches(newMatches);
+
+          Popup.show({
+            type: 'Success',
+            title: 'Match Found!',
+            button: true,
+            textBody: name,
+            buttontext: 'Ok',
+            callback: () => Popup.hide()
+          });
+        })
         .catch((error) => console.log(error));
-      Popup.show({
-        type: 'Success',
-        title: 'Match Found!',
-        button: true,
-        textBody: 'Name',
-        buttontext: 'Ok',
-        callback: () => Popup.hide()
-      });
-          
     }
   };
 

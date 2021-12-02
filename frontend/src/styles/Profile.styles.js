@@ -20,6 +20,23 @@ export default StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
+  matchesContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginRight: 250
+  },
+  matchesText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    alignSelf: 'flex-start',
+    marginTop: 30,
+  },
+  matchedUsersText: {
+    fontSize: 18,
+    marginTop: 10,
+    marginBottom: 10,
+  },
   aboutUser: {
     fontSize: 12,
     fontWeight: '600',

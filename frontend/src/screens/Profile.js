@@ -18,11 +18,20 @@ import {
 } from 'react-native';
 
 
-
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const userId = useContext(UserContext).userId;
+
+  const { userId, matches } = useContext(UserContext);
+
+  const MatchesList = () => {
+    const matchesText = matches.map((match) =>
+      <Text style={styles.matchedUsersText} key={"match-" + match}>
+        {match}
+      </Text>
+    );
+    return <View>{matchesText}</View>;
+  }
 
 
   firestore.collection('users').doc(userId).get()
@@ -47,6 +56,11 @@ const Profile = () => {
               <Text>Sign Out</Text>
             </TouchableOpacity>
           </View>
+          <View style={styles.matchesContainer}>
+            <Text style={styles.matchesText}>Matches</Text>
+          </View>
+          <MatchesList/>
+          {/* <Text style={styles.matchedUsersText}>{matches[0]}</Text> */}
       </ScrollView>
       </SafeAreaView>
     );

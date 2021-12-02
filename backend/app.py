@@ -42,14 +42,24 @@ def get_match(user_id):
         for swipe in swipes.stream():
             swipes_data.append([user.id, swipe.id, swipe.to_dict()["weight"]])
     swipes_df = pd.DataFrame(swipes_data, columns=["userId", "item", "weight"])
+
     final = pd.pivot_table(swipes_df, values="weight", index="userId", columns="item")
     final = final.fillna(0)
+
     cosine = cosine_similarity(final)
     np.fill_diagonal(cosine, 0)
+
     similarities = pd.DataFrame(cosine, index=final.index)
     similarities.columns = final.index
     similarities = np.abs(similarities)
-    print(similarities[user_id].sort_values(ascending=False).index[0])
+
+    id = similarities[user_id].sort_values(ascending=False).index[0]
+    user_data = users.document(id).get().to_dict()
+
+    # print(final.loc[user_id].sort_values())
+    # print(final.loc[id].sort_values())
+
+    return user_data["firstName"], user_data["lastName"]
     
 
 @app.route('/addSwipes', methods=['POST'])
@@ -61,9 +71,9 @@ def add_swipes():
 
         add_swipes_helper(user_id, swiped, 1)
         add_swipes_helper(user_id, not_swiped, 0)
-        get_match(user_id)
+        first_name, last_name = get_match(user_id)
 
-        return {"message": "succeeded"}, 200
+        return {"firstName": first_name, "lastName": last_name}, 200
     except Exception as e:
         return f"An error occurred: {e}"
         # print(e)
