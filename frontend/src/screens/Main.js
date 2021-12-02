@@ -81,7 +81,8 @@ const Main = () => {
         title: 'Match Found!',
         button: true,
         textBody: 'Name',
-        buttontext: 'Ok'
+        buttontext: 'Ok',
+        callback: () => Popup.hide()
       });
           
     }
