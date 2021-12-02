@@ -46,6 +46,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(true);
   const [userId, setUserId] = useState("");
+  const [matches, setMatches] = useState([]);
 
   const swiped = getAsyncSwipes("swiped");
   const notSwiped = getAsyncSwipes("notSwiped");
@@ -80,7 +81,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <UserContext.Provider value={{ userId, swiped, notSwiped }}>
+      <UserContext.Provider value={{ userId, swiped, notSwiped, matches, setMatches }}>
         <MyTabs />
       </UserContext.Provider>
     </NavigationContainer>
