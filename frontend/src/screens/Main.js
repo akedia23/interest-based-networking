@@ -1,9 +1,11 @@
 import React, { useRef, useState, useContext } from "react";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import Swiper from "react-native-deck-swiper";
 import { photoCards, photoCards2 } from "../constants/";
-import { TouchableOpacity, Image } from "react-native";
-import { createIconSetFromFontello } from "react-native-vector-icons";
+import { TouchableOpacity, Image,Text } from "react-native";
+import Modal from "react-native-modal";
+import { Root, Popup, Toast } from 'popup-ui'
+
 
 import { Card, OverlayLabel } from "../components";
 import styles from "../styles/App.styles";
@@ -17,7 +19,10 @@ const Main = () => {
   const [totalSwipes, setTotalSwipes] = useState(0);
   const [leftEnlargedImage, setLeftEnlargedImage] = useState("DEFAULT");
   const [rightEnlargedImage, setRightEnlargedImage] = useState("DEFAULT");
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [randomSwipeCount, setRandomSwipeCount] = useState(getRandomInt(5, 10));
+  const handleModal = () => setIsModalVisible(() => !isModalVisible);
+
   // const [enlargedImage, setEnlargedImage] = useState("DEFAULT");
 
   const userId = useContext(UserContext).userId;
@@ -71,10 +76,19 @@ const Main = () => {
         .then((response) => response.text())
         .then((data) => console.log(data))
         .catch((error) => console.log(error));
+      Popup.show({
+        type: 'Success',
+        title: 'Match Found!',
+        button: true,
+        textBody: 'Name',
+        buttontext: 'Ok'
+      });
+          
     }
   };
 
   return (
+    <Root>
     <View>
       {leftEnlargedImage === "TAPPED" && (
         <View style={{ position: "absolute", zIndex: 2 }}>
@@ -176,6 +190,7 @@ const Main = () => {
         </View>
       </View>
     </View>
+    </Root>
   );
 };
 
